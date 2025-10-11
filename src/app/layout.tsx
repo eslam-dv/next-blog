@@ -32,13 +32,17 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             <Header />
-            <main>{children}</main>
+            <main className="h-[calc(100vh-70px)]">{children}</main>
           </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
   );
 }
-

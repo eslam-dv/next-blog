@@ -1,16 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, LogIn } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { Button } from "./ui/button";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -39,15 +34,19 @@ export default function Header() {
           ))}
         </ul>
         <div className="flex gap-5">
-          <button
-            className="cursor-pointer py-1 px-2 rounded"
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
             {theme === "light" ? <Sun /> : <Moon />}
-          </button>
+          </Button>
           <SignedOut>
-            <SignInButton />
-            <SignUpButton />
+            <SignInButton>
+              <Button variant="outline">
+                <LogIn /> Sign In
+              </Button>
+            </SignInButton>
           </SignedOut>
           <SignedIn>
             <UserButton />
