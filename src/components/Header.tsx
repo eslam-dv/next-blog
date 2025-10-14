@@ -20,7 +20,7 @@ export default function Header() {
   return (
     <header className="px-2 py-4 border-b border-gray-200">
       <nav className="container mx-auto flex gap-5 items-center justify-between">
-        <h1>Islam's Blog</h1>
+        <h1>Islam&apos;s Blog</h1>
         <ul className="flex gap-5">
           {menus.map((item, idx) => (
             <li key={idx}>
