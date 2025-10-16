@@ -7,7 +7,7 @@ type User = {
   last_name: string | null;
   image_url: string;
   email_addresses: any;
-  username: string | null;
+  username?: string | null;
 };
 
 export const createUser = async ({

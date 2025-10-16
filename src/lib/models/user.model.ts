@@ -5,7 +5,7 @@ export interface IUser extends Document {
   email: string;
   firsName: string;
   lastName: string;
-  username: string;
+  username?: string;
   profilePicture?: string;
   isAdmin?: boolean;
 }
