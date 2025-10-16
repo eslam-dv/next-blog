@@ -38,7 +38,8 @@ export async function POST(req: NextRequest) {
 
         if (user && eventType === "user.created") {
           try {
-            await clerkClient.users.updateUserMetadata(id, {
+            const client = await clerkClient();
+            await client.users.updateUserMetadata(id, {
               publicMetadata: {
                 userMongoId: user._id,
                 isAdmin: user.isAdmin,
