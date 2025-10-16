@@ -16,7 +16,7 @@ const userSchema = new Schema<IUser>(
     email: { type: String, required: true, unique: true },
     firsName: { type: String, required: true },
     lastName: { type: String, required: true },
-    username: { type: String, required: true, unique: true },
+    username: { type: String, unique: true },
     profilePicture: { type: String },
     isAdmin: { type: Boolean, default: false },
   },
