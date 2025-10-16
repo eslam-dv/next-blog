@@ -1,14 +1,47 @@
 import UserModel from "../models/user.model";
 import { connectDB } from "../db";
 
-export const createOrUpdateUser = async (
-  id: string,
-  first_name: string,
-  last_name: string,
-  image_url: string,
-  email_addresses: any,
-  username: string,
-) => {
+type User = {
+  id: string;
+  first_name: string | null;
+  last_name: string | null;
+  image_url: string;
+  email_addresses: any;
+  username: string | null;
+};
+
+export const createUser = async ({
+  id,
+  first_name,
+  last_name,
+  image_url,
+  email_addresses,
+  username,
+}: User) => {
+  try {
+    await connectDB();
+    const newUser = await UserModel.create({
+      clerkId: id,
+      firsName: first_name,
+      lastName: last_name,
+      profilePicture: image_url,
+      email: email_addresses[0]?.email_address,
+      username,
+    });
+    return newUser;
+  } catch (err) {
+    console.error("Error creating user: ", err);
+  }
+};
+
+export const updateUser = async ({
+  id,
+  first_name,
+  last_name,
+  image_url,
+  email_addresses,
+  username,
+}: Partial<User>) => {
   try {
     await connectDB();
     const user = await UserModel.findOneAndUpdate(
@@ -18,15 +51,15 @@ export const createOrUpdateUser = async (
           firstName: first_name,
           lastName: last_name,
           profilePicture: image_url,
-          email: email_addresses[0].email_address,
+          email: email_addresses![0]?.email_address,
           username,
         },
       },
-      { new: true, upsert: true },
+      { new: true },
     );
     return user;
   } catch (err) {
-    console.error("Erro creating or updating the user", err);
+    console.error("Error Updating user: ", err);
   }
 };
 
