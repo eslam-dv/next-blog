@@ -20,9 +20,16 @@ export const createUser = async ({
 }: User) => {
   try {
     await connectDB();
+    const userExist = await UserModel.findOne({
+      email: email_addresses[0]?.email_address,
+    });
+    if (userExist) {
+      console.log("user already exists");
+      return;
+    }
     const newUser = await UserModel.create({
       clerkId: id,
-      firsName: first_name,
+      firstName: first_name,
       lastName: last_name,
       profilePicture: image_url,
       email: email_addresses[0]?.email_address,
