@@ -1,7 +1,7 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useUser } from "@clerk/nextjs";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -11,8 +11,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import RichtextEditor from "@/components/RichTextEditor";
+} from "@/components/ui/select"
+const RichtextEditor = dynamic(() => import("@/components/RichTextEditor"), {
+  ssr: false,
+});
 
 function CreatePostPage() {
   const { isLoaded, user, isSignedIn } = useUser();
